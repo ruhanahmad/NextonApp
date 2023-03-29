@@ -14,6 +14,25 @@ import 'dart:io' as io;
 import 'package:image_picker/image_picker.dart';
 import 'package:nextonapp/admin_panel.dart';
 class UserController extends GetxController {
+String? textPioneer;
+String?  labourName;
+String? labourWork;
+String? long;
+String? lat;
+Future uploadLabour() async {
+     await    FirebaseFirestore.instance.collection("labour").add({
+                "labourName":labourName!,
+                "labourWork":labourWork,
+                "long":long,
+                "lat":lat,
+
+           });
+
+}
+  
+
+
+
 
  String? selectedChip;
  String? productName;

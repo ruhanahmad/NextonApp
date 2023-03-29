@@ -50,7 +50,7 @@ class _FoodCategoryContainerState extends State<FoodCategoryContainer> {
           scrollDirection: Axis.horizontal,
           itemCount: docs.length,
           itemBuilder:(BuildContext context,int i){
-         userController.nami  = docs[0]["name"];
+        //  userController.nami  = docs[0]["name"];
          userController.update();
          return Padding(
            padding: const EdgeInsets.only(left:8.0),
@@ -60,10 +60,10 @@ class _FoodCategoryContainerState extends State<FoodCategoryContainer> {
                                _selectedIndex.value = i;
                               userController.nami = docs[i]["name"];
                               print(userController.nami);
-                             userController.update();
+                             
                             
                            });
-                             
+                             userController.update();
     
                         PopulareContainer();
                            

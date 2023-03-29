@@ -6,6 +6,9 @@ import 'package:nextonapp/Ui/Payment%20Screen/proceed_payment_screen.dart';
 import 'package:nextonapp/Ui/User%20Services/login.dart';
 import 'package:nextonapp/admin_panel.dart';
 import 'package:nextonapp/controller.dart';
+import 'package:nextonapp/labour/upload_labour.dart';
+import 'package:nextonapp/maps/map_view.dart';
+import 'package:nextonapp/maps/map_view_google.dart';
 
 
 import '../../String File/image_string.dart';
@@ -48,20 +51,31 @@ class _MenuScreenState extends State<MenuScreen> {
                     "assets/bilal.JPG",
                   ),
                 ),
-                Text(
-                  "Bilal Shaukat",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w700),
+                GestureDetector(
+                  onTap: () {
+                    
+                   
+                  },
+                  child: Text(
+                    "Bilal Shaukat",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
                 SizedBox(height: 5.h),
-                Text(
-                  "CEO Nexton Paints",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(MapViewGoogle());
+                  },
+                  child: Text(
+                    "CEO Nexton Paints",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400),
+                  ),
                 ),
                 SizedBox(height: 35.h),
                 ListTile(
@@ -92,7 +106,12 @@ class _MenuScreenState extends State<MenuScreen> {
                   title: Text(Payment),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  LabourUpload()));
+                  },
                   leading: Icon(Icons.settings),
                   title: Text(Settings),
                 ),

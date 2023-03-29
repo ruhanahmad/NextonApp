@@ -18,23 +18,42 @@ class PopulareContainer extends StatefulWidget {
 }
 
 
-// @override
-// void initState() {
-  
-//   super.initState();
-  
-// }
+
+
+
+
+
 
 class _PopulareContainerState extends State<PopulareContainer> {
+
+// @override
+//   void initState() {
+//     //konsa code chalana hay
+//     //ap ny mapbox use kia h ?
+//     //ya mai ny vysy he pcha tha v dsry project ka tha  
+//     yearsss();
+//     // TODO: implement initState
+//     super.initState();
+//   }
+
+//   yearsss()async{
+// await Get.snackbar("title", "message",duration: Duration(seconds: 4));
+
+//   }
+
+
   @override
   Widget build(BuildContext context) {
+ 
+
+     
     UserController userController = Get.put(UserController());
     return Container(
       // color: Colors.red,
       height: 300.h,
       child: 
       StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('product').snapshots(),
+        stream: FirebaseFirestore.instance.collection('product').where("catName", isEqualTo: userController.nami).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -52,7 +71,9 @@ class _PopulareContainerState extends State<PopulareContainer> {
                 final data = docs[index];
                 return 
                     InkWell(
-        onTap: () {
+        onTap: ()async{
+await alerting(data['product image'],data["name"],data["video"]);
+      //  showProductDetails(context);
           // Navigator.push(
           //     context,
           //     MaterialPageRoute(
@@ -120,6 +141,8 @@ class _PopulareContainerState extends State<PopulareContainer> {
           message: 'Aslamo Alikum ! i want this product ${data["name"]} ',
         ),
       )
+
+      ,
                 // Row(
                 //   children: [
                 //     Icon(
@@ -189,6 +212,48 @@ class _PopulareContainerState extends State<PopulareContainer> {
       // ),
     );
   }
+
+   Future<void>? alerting(image,name,price){
+    showDialog(context: context, builder: (context){
+      return     AlertDialog(
+        content: new
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+               Image.network(
+                  image,
+                  height: 112.h,
+                  width: 170.w,
+                ),
+                SizedBox(height: 10.h),
+                Container(
+                  // color: Colors.yellow,
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                    name,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15.sp),
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                SizedBox(
+                  width: 250,
+                  child: Text(
+                 "Price "+   price,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13.sp),
+                  ),
+                ),
+          ],
+        ),
+      );
+    });
+  }
+
 }
 
 class Category extends StatelessWidget {
@@ -282,6 +347,7 @@ class Category extends StatelessWidget {
           ),
         ));
   }
+  
 
 }
 
@@ -309,5 +375,7 @@ class WhatsAppButton extends StatelessWidget {
     } else {
       throw 'Could not launch $url';
     }
-  }
+  } 
 }
+
+
