@@ -230,7 +230,7 @@ appBar: AppBar(title: IconButton(onPressed: (){
                   onPressed: ()async {
                       await alerts();
                   }, 
-                 icon: Icon(Icons.abc_rounded)),),
+                 icon: Icon(Icons.upload_file)),),
                ),),
         
                   //                          Container(
@@ -303,22 +303,7 @@ appBar: AppBar(title: IconButton(onPressed: (){
                                   },
                                 ),
             
-              //                         InkWell(
-              //                           onTap:  
-              // // alertVideoAfter,    
-              //  (){
-        
-              //  }, 
-                                  
-              //                         child:   Container(
-              //                               height: 39,
-              //                               width:63,
-              //                               decoration: BoxDecoration(
-              //                                 borderRadius: BorderRadius.all(Radius.circular(7)),
-              //                                   color: Color(0xFF9D0105),
-              //                                   image: DecorationImage(image: AssetImage("assets/4.png"),fit: BoxFit.cover)),
-              //                             ),
-              //                         ),
+          
           
                               ],
                             ),

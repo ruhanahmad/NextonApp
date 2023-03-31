@@ -2,6 +2,7 @@
 
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,17 +29,89 @@ class LabourUpload extends StatefulWidget {
 
 class _LabourUploadState extends State<LabourUpload> {
 
+    Future<void>? _clear() {
+    setState(() => _imageFile = null,
 
-
-  
-  TextEditingController textEditingController = TextEditingController();
-    final LocatitonGeocoder geocoder = LocatitonGeocoder("AIzaSyCZJDq4ZZiah_srzkzjQDtxnXVE-gbf85M");
-   List<dynamic> _placesList = [];
-  var uuid = Uuid();
+    );
+  }
    XFile? _imageFile;
   UserController userController = Get.put(UserController());
+  Future<void>? alerts(){
+    showDialog(context: context, builder: (context){
+      return     AlertDialog(
+        content: new
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+          
+            SizedBox(height: 30,),
+            GestureDetector(
+              onTap:(){
+                // _pickImage(ImageSource.gallery);
+                selectImages();
+                Navigator.pop(context);
+                print("object");
+              } ,
+              child: Row(
+                children: [
+                   Icon(Icons.browse_gallery),
+       
+                            //                Container(
+                            // height: 40,
+                            // width: 70,
+                            // decoration: BoxDecoration(
+                            //     color: Colors.black,
+                            //     image: DecorationImage(image: AssetImage("assets/3.png"),fit: BoxFit.cover)),),
+                  SizedBox(width: 5),
+                 Text('Choose from Gallery',style: TextStyle(color: Colors.black),),
+                ],
+              ),
+            ),
 
 
+
+              SizedBox(height: 30,),
+            GestureDetector(
+              onTap:(){
+                // _pickImage(ImageSource.gallery);
+                 ImagesCamera();
+                Navigator.pop(context);
+                print("object");
+              } ,
+              child: Row(
+                children: [
+                   Icon(Icons.browse_gallery),
+       
+                            //                Container(
+                            // height: 40,
+                            // width: 70,
+                            // decoration: BoxDecoration(
+                            //     color: Colors.black,
+                            //     image: DecorationImage(image: AssetImage("assets/3.png"),fit: BoxFit.cover)),),
+                  SizedBox(width: 5),
+                  Text('Choose from Camera',style: TextStyle(color: Colors.black),),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+ Future<XFile?>  ImagesCamera()async {
+     XFile? images = await _picker.pickImage(source: ImageSource.camera);
+    // if (images !=null) {
+    //   imagesList.add(images);
+    // }
+    setState(() {
+      _imageFile = images ;
+    });
+
+       if (images !=null) {
+        userController.imageFile = images.path == null ? "" :images.path;
+    userController.update();
+    }
+  }
   
   final ImagePicker _picker = ImagePicker();
     var imageFile;
@@ -47,7 +120,7 @@ class _LabourUploadState extends State<LabourUpload> {
 
     setState(() {
 
-   _imageFile =  images!;
+   _imageFile =  images;
 
     });
     
@@ -57,6 +130,17 @@ class _LabourUploadState extends State<LabourUpload> {
     }
   
   }
+
+  
+  TextEditingController textEditingController = TextEditingController();
+    final LocatitonGeocoder geocoder = LocatitonGeocoder("AIzaSyCZJDq4ZZiah_srzkzjQDtxnXVE-gbf85M");
+   List<dynamic> _placesList = [];
+  var uuid = Uuid();
+ 
+
+
+  
+ 
   var session = "12";
    List<City> cities = [];
      void getUpdatess() {
@@ -280,7 +364,8 @@ new TextFormField(
                                       userController.update();
                                             print(address.first.coordinates.latitude);
                                          },
-                                        title: Text(_placesList[index]["description"],style: TextStyle(color: Colors.black),));
+                                        title: Text(_placesList[index]["description"],style: TextStyle(color: Colors.black),)
+                                        );
                                     }) )
                                  
                                   
@@ -288,13 +373,60 @@ new TextFormField(
                                                            )
                                                     ),
                                   ),
-                                                                       ElevatedButton(
+
+   if (_imageFile != null) ...[
+                            Image.file(
+                              width:200,
+                              height:200,
+                              File(
+                                
+                                _imageFile!.path)),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                // ElevatedButton(
+                                //   child: Icon(Icons.crop),
+                                //   onPressed: _cropImage,
+                                // ),
+                                ElevatedButton(
+                              style: ElevatedButton.styleFrom(primary: Color(0xFF9D0105),),
+                                  child: Icon(Icons.refresh,),
+                                  onPressed: _clear,
+                                ),
+                                                            ElevatedButton(
                               style: ElevatedButton.styleFrom(primary: Color(0xFF9D0105),),
                                   child: Icon(Icons.upload_file,),
                                   onPressed:()async{
-                              await       userController.uploadLabour();
+                              await       userController.uploadFilesLabour(_imageFile,context);
                                   },
                                 ),
+            
+          
+          
+                              ],
+                            ),
+            
+                            // Uploader(file: _imageFile)
+                          ],
+         Center(child: GestureDetector(
+                onTap: ()async{
+                  await alerts();
+                },
+                 child: Container(height: 30,width: 30,child: IconButton(
+                  onPressed: ()async {
+                      await alerts();
+                  }, 
+                 icon: Icon(Icons.upload_file)),),
+               ),),
+
+
+                              //                                          ElevatedButton(
+                              // style: ElevatedButton.styleFrom(primary: Color(0xFF9D0105),),
+                              //     child: Icon(Icons.upload_file,),
+                              //     onPressed:()async{
+                              // await       userController.uploadLabour();
+                              //     },
+                              //   ),
         
               //  Center(child: GestureDetector(
               //   onTap: ()async{

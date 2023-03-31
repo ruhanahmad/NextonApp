@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:get/get.dart';
+import 'package:nextonapp/Constant%20File/autocomolete.dart';
 
 import '../Constant File/food_category_constantfile.dart';
 import '../Constant File/populare_container_constant.dart';
@@ -49,7 +51,12 @@ class _home_screenState extends State<home_screen> {
           ),
         ),
         actions: [
-          Image.asset(profile_1, height: 30.h, width: 40.w),
+          GestureDetector(
+            onTap: () {
+              Get.to(() =>AutocompleteWithFirebase());
+             
+            },
+            child: Image.asset(profile_1, height: 30.h, width: 40.w)),
           SizedBox(width: 5.w),
         ],
       ),

@@ -47,7 +47,7 @@ print(Geolocator.getCurrentPosition());
    )
   ];
   Completer<GoogleMapController>  _completer = Completer();
-  static final CameraPosition _cameraPosition = CameraPosition(target: LatLng(51.5090214, -0.1982948),zoom: 14.02);
+  static final CameraPosition _cameraPosition = CameraPosition(target: LatLng(30.3753, 69.3451),zoom: 7);
      void getUpdatess() {
       setState(() {
               if (session == null){
@@ -132,7 +132,7 @@ floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
            GoogleMapController controller = await _completer.future;
     await    getsCurrentLocation().then((value) async{
           // print(value.accuracy == null ? "" :value.accuracy);
-           controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(40.7127753, -74.0059728),zoom: 2))
+           controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(30.3753, 69.3451),zoom: 7))
             
             
             );
@@ -140,16 +140,16 @@ floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
             setState(() {
               
             });
-             _marker.add(Marker(
-                icon:
-                //  BitmapDescriptor.defaultMarker,
-                await  MarkerIcon.pictureAsset(assetPath: "assets/labour.png", width: 60, height: 60),
-              markerId: MarkerId("2"),
-              position: LatLng(48.8566, 2.3522),
-              draggable: true,
-               flat: true,
-              infoWindow: InfoWindow(title: "asd" +"   "+"asdas")
-             ));
+            //  _marker.add(Marker(
+            //     icon:
+            //     //  BitmapDescriptor.defaultMarker,
+            //     await  MarkerIcon.pictureAsset(assetPath: "assets/labour.png", width: 60, height: 60),
+            //   markerId: MarkerId("2"),
+            //   position: LatLng(48.8566, 2.3522),
+            //   draggable: true,
+            //    flat: true,
+            //   infoWindow: InfoWindow(title: "asd" +"   "+"asdas")
+            //  ));
         });
          
 
@@ -160,118 +160,120 @@ floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
        child: Icon(Icons.location_on),
        ),
       body:
-           Stack(
-                children: <Widget>[
-                  Container(
-                    child: 
-                          GoogleMap(initialCameraPosition: _cameraPosition,
-      mapType: MapType.normal,
-      myLocationEnabled: true,
-      myLocationButtonEnabled: true,
-       onMapCreated: (GoogleMapController controller) {
-            _completer.complete(controller);
-      
-       },
-       markers: Set<Marker>.of(_marker),
-       
-       ),
+           SafeArea(
+             child: Stack(
+                  children: <Widget>[
+                    Container(
+                      child: 
+                            GoogleMap(initialCameraPosition: _cameraPosition,
+                 mapType: MapType.normal,
+                 myLocationEnabled: true,
+                 myLocationButtonEnabled: true,
+                  onMapCreated: (GoogleMapController controller) {
+              _completer.complete(controller);
+                 
+                  },
+                  markers: Set<Marker>.of(_marker),
+                  
                   ),
-                  // Stack(
-                  //     children: <Widget>[
-                  //   Positioned(
-                  //   bottom: 0,
-                  //   right: 250,
-                  //   child: ElevatedButton(
-                  //         onPressed: (){} ,
-                  //         child: Text("dosomething"),
-                  //         // color: Colors.grey,
-                  //         // textColor: Colors.black,
-                          
-                  //         )),
-                  //   ]),
-                  Container( 
-                  height: 100,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Row(
-                         children: <Widget> [
-
-                          Expanded(
-child: 
-new TextFormField(
-  controller: textEditingController,
-                      decoration: new InputDecoration(
-                        labelText: "Enter Address",
-                        fillColor: Colors.white,
-                        border: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(25.0),
-                          borderSide: new BorderSide(
-                          ),
-                        ),
-                        //fillColor: Colors.green
-                      ),
-                      validator: (val) {
-                        // if(val.length==0) {
-                        //   return "Email cannot be empty";
-                        // }else{
-                        //   return null;
-                        // }
-                      },
-                      keyboardType: TextInputType.emailAddress,
-                      style: new TextStyle(
-                        fontFamily: "Poppins",
-                      ),
                     ),
-
-                   ) ]
-                         )
-                  ),
-                  textEditingController.text.length == 0 ?  Text("data") :
-                                  Padding(
-                                    padding: const EdgeInsets.only(top:120.0),
-                                    child: Container( 
-                                      // color: Colors.white,
-                                                    height: MediaQuery.of(context).size.width * 0.3,
-                                                    width: MediaQuery.of(context).size.width * 0.8,
-                                                    child: Row(
-                                                           children: <Widget> [
-                                  
-                                                            Expanded(
-                                  child: 
-                                  ListView.builder(
-                                    itemCount:_placesList.length ,
-                                    itemBuilder:(BuildContext context, index) {
-                                      return ListTile(
-                                         onTap: () async{
-                                           final address = await geocoder.findAddressesFromQuery(_placesList[index]["description"]);
-                                           textEditingController.text = "";
-                                            // List<Location> locations = await locationFromAddress("Pakistan");
-                                            // print(locations.last.longitude);
-                                            print(address.first.coordinates.latitude);
-                                         },
-                                        title: Text(_placesList[index]["description"],style: TextStyle(color: Colors.black),));
-                                    }) )
-                                 
-                                  
-                                                      ]
-                                                           )
-                                                    ),
-                                  ),
-
-    ]
-    
-    // StreamBuilder<QuerySnapshot>(stream: FirebaseFirestore.instance.collection('labour').snapshots(),
-    // builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-    //    if (!snapshot.hasData) {
-    //         return Center(
-    //           child: CircularProgressIndicator(),
-    //         );
-    //       }
-    //       final docs = snapshot.data!.docs;
-    //   return 
-  
-    // },
-    
-    )
+                    // Stack(
+                    //     children: <Widget>[
+                    //   Positioned(
+                    //   bottom: 0,
+                    //   right: 250,
+                    //   child: ElevatedButton(
+                    //         onPressed: (){} ,
+                    //         child: Text("dosomething"),
+                    //         // color: Colors.grey,
+                    //         // textColor: Colors.black,
+                            
+                    //         )),
+                    //   ]),
+          //           Container( 
+          //           height: 100,
+          //           width: MediaQuery.of(context).size.width * 0.8,
+          //           child: Row(
+          //                  children: <Widget> [
+           
+          //                   Expanded(
+          //  child: 
+          //  new TextFormField(
+          //    controller: textEditingController,
+          //               decoration: new InputDecoration(
+          //                 labelText: "Enter Address",
+          //                 fillColor: Colors.white,
+          //                 border: new OutlineInputBorder(
+          //                   borderRadius: new BorderRadius.circular(25.0),
+          //                   borderSide: new BorderSide(
+          //                   ),
+          //                 ),
+          //                 //fillColor: Colors.green
+          //               ),
+          //               validator: (val) {
+          //                 // if(val.length==0) {
+          //                 //   return "Email cannot be empty";
+          //                 // }else{
+          //                 //   return null;
+          //                 // }
+          //               },
+          //               keyboardType: TextInputType.emailAddress,
+          //               style: new TextStyle(
+          //                 fontFamily: "Poppins",
+          //               ),
+          //             ),
+           
+          //            ) ]
+          //                  )
+          //           ),
+                    // textEditingController.text.length == 0 ?  Text("data") :
+                    //                 Padding(
+                    //                   padding: const EdgeInsets.only(top:120.0),
+                    //                   child: Container( 
+                    //                     // color: Colors.white,
+                    //                                   height: MediaQuery.of(context).size.width * 0.3,
+                    //                                   width: MediaQuery.of(context).size.width * 0.8,
+                    //                                   child: Row(
+                    //                                          children: <Widget> [
+                                    
+                    //                                           Expanded(
+                    //                 child: 
+                    //                 ListView.builder(
+                    //                   itemCount:_placesList.length ,
+                    //                   itemBuilder:(BuildContext context, index) {
+                    //                     return ListTile(
+                    //                        onTap: () async{
+                    //                          final address = await geocoder.findAddressesFromQuery(_placesList[index]["description"]);
+                    //                          textEditingController.text = "";
+                    //                           // List<Location> locations = await locationFromAddress("Pakistan");
+                    //                           // print(locations.last.longitude);
+                    //                           print(address.first.coordinates.latitude);
+                    //                        },
+                    //                       title: Text(_placesList[index]["description"],style: TextStyle(color: Colors.black),));
+                    //                   }) )
+                                   
+                                    
+                    //                                     ]
+                    //                                          )
+                    //                                   ),
+                    //                 ),
+           
+               ]
+               
+               // StreamBuilder<QuerySnapshot>(stream: FirebaseFirestore.instance.collection('labour').snapshots(),
+               // builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+               //    if (!snapshot.hasData) {
+               //         return Center(
+               //           child: CircularProgressIndicator(),
+               //         );
+               //       }
+               //       final docs = snapshot.data!.docs;
+               //   return 
+             
+               // },
+               
+               ),
+           )
        
     
     );

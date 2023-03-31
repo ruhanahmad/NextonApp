@@ -3,6 +3,9 @@ import 'package:curved_nav_bar/fab_bar/fab_bottom_app_bar_item.dart';
 import 'package:curved_nav_bar/flutter_curved_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:nextonapp/Constant%20File/autocomolete.dart';
+import 'package:nextonapp/maps/map_view_google.dart';
 
 import '../home_screen.dart';
 import '../like_food_screen.dart';
@@ -31,7 +34,7 @@ class _bottomBarState extends State<bottomBar> {
       body: CurvedNavBar(
         actionButton: CurvedActionBar(
             onTab: (index) {
-              print(index);
+            //  Get.to(PopulareContainerss());
             },
             activeIcon: Container(
               padding: EdgeInsets.all(8),
@@ -112,6 +115,7 @@ class _bottomBarState extends State<bottomBar> {
               text: ''),
         ],
         bodyItems: [
+    
           Container(
             height: MediaQuery.of(context).size.height,
             child: home_screen(),
@@ -122,11 +126,11 @@ class _bottomBarState extends State<bottomBar> {
           ),
           Container(
             height: MediaQuery.of(context).size.height,
-            child: PopulareContainerss(),
+            child:AutocompleteWithFirebase(),
           ),
           Container(
             height: MediaQuery.of(context).size.height,
-            child:PopulareContainerss(),
+            child:MapViewGoogle(),
           ),
         ],
       ),

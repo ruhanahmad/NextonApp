@@ -51,7 +51,7 @@ class _FoodCategoryContainerState extends State<FoodCategoryContainer> {
           itemCount: docs.length,
           itemBuilder:(BuildContext context,int i){
         //  userController.nami  = docs[0]["name"];
-         userController.update();
+        //  userController.update();
          return Padding(
            padding: const EdgeInsets.only(left:8.0),
            child: InkWell(

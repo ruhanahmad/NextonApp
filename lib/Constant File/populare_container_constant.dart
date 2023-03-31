@@ -109,6 +109,18 @@ await alerting(data['product image'],data["name"],data["video"]);
                   data['product image'],
                   height: 112.h,
                   width: 170.w,
+                      loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 10.h),
                 Container(
@@ -170,10 +182,7 @@ await alerting(data['product image'],data["name"],data["video"]);
             ),
           ),
         ));
-                // ListTile(
-                //   title: Text(data['name'],style: TextStyle(color: Colors.black),),
-                //   subtitle: Text("data['description']"),
-                // );
+              
               },
             ),
           );

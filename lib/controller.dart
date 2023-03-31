@@ -14,6 +14,98 @@ import 'dart:io' as io;
 import 'package:image_picker/image_picker.dart';
 import 'package:nextonapp/admin_panel.dart';
 class UserController extends GetxController {
+
+String? hintText;
+
+
+   Future<UploadTask?> uploadFilesLabour(XFile? files,context) async {
+    // EasyLoading.show();
+    await getIDo();
+     String rand = await tenNumberGenerated();
+ var uniqueKeys = firebaseRef.collection("users");
+    var uniqueKey = firebaseRef.collection("users");
+    if (files == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No file was selected'),
+        ),
+      );
+
+      return null;
+    }
+
+    UploadTask uploadTask;
+
+    // Create a Reference to the file
+    Reference ref = FirebaseStorage.instance
+        .ref()
+        .child('laboutImage') 
+        .child('${rand}.jpg');
+
+    final metadata = SettableMetadata(
+      contentType: 'image/jpeg',
+      customMetadata: {'picked-file-path': files.path},
+    );
+    // EasyLoading.show();
+
+    if (kIsWeb) {
+      uploadTask = ref.putData(await files.readAsBytes(), metadata);
+    } else {
+      uploadTask = ref.putFile(io.File(files.path), metadata);
+
+    await  uploadTask.whenComplete(() async {
+        var uploadpaths = await uploadTask.snapshot.ref.getDownloadURL();
+
+             await    FirebaseFirestore.instance.collection("labour").add({
+                "labourName":labourName!,
+                "labourWork":labourWork,
+                "long":long,
+                "lat":lat,
+                "labourImage":uploadpaths,
+
+           });
+        
+         
+              //  await SendMailss();
+           Get.snackbar("Uploaded", "Upload successfully");
+          //  Get.to(HomePage());
+          // await   sendEmail();
+          EasyLoading.dismiss();
+        // Get.to(HomePage());
+        
+      });
+
+
+    }
+    
+    // await ref.getDownloadURL().then((value) => updataIdCard(value));
+
+    return Future.value(uploadTask);
+  }
+
+ List<UploadTask> _uploadTasksi = [];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 String? textPioneer;
 String?  labourName;
 String? labourWork;
