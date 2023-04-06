@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "nextonapp" "\0"
+            VALUE "FileDescription", "Nexton Paints" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "nextonapp" "\0"
+            VALUE "InternalName", "Nexton Paints" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "nextonapp.exe" "\0"
-            VALUE "ProductName", "nextonapp" "\0"
+            VALUE "ProductName", "Nexton Paints" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

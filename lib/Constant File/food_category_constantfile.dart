@@ -32,6 +32,7 @@ class _FoodCategoryContainerState extends State<FoodCategoryContainer> {
   String? nami;
   @override
   Widget build(BuildContext context) {
+    //ya data mai category ka ly rhi hu from firebase ya vala or ya h category?
     return StreamBuilder<QuerySnapshot>(
       stream:  FirebaseFirestore.instance.collection('Category').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -63,15 +64,27 @@ class _FoodCategoryContainerState extends State<FoodCategoryContainer> {
                              
                             
                            });
+                           
+
                              userController.update();
+                             //ya kya forceupdate kns bla h
+                             // bas ustaad ki aik rag wad hoti hay
+                             //ustaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad g tusi great oo
+                             //ye na bas Allah izzat rakhta hay meri mujhe khud nai pta hota ku
+                             // ?matlab mujhe khud nai pta hota hal bas aapse conect karne k baad achank ajata hay hal
+                             //khair choro 
+                             //aor iske ilawa kya karna tha
+                             //acha aik or chz eska error vo kbho kbhi deta g k setstate build method k bd use kr hy
+                                                                                    Get.forceAppUpdate();
+
     
                         PopulareContainer();
                            
                             // image1.value = e.value.assetsImage;
                           },
                           child: Container(
-                            height: 109.h,
-                            width: 55.w,
+                            // height: 109.h,
+                            // width: .w,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 // border: Border.all(color: Colors.grey),

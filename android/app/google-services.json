@@ -33,6 +33,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706212287201:android:8e5cd5321b8a8dd770dda0",
+        "android_client_info": {
+          "package_name": "com.icinextonpaints.nextonapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706212287201-jn1m266ib2a8c2bti5f63486tcha3d5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCru7rAuAocPe5h5Ga4MH_k-UltxfmiJkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706212287201-jn1m266ib2a8c2bti5f63486tcha3d5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

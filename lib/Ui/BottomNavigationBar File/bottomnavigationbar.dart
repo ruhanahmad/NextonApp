@@ -130,7 +130,7 @@ class _bottomBarState extends State<bottomBar> {
           ),
           Container(
             height: MediaQuery.of(context).size.height,
-            child:MapViewGoogle(),
+            child:PopulareContainerss(),
           ),
         ],
       ),

@@ -82,11 +82,13 @@ class _MenuScreenState extends State<MenuScreen> {
                   ListTile(
                     onTap: () async{
                       await  userController.getCatgeories();
+                        userController.loginName = "admin";
+                          userController.update();
                                    Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => 
-                              const     
+                                 
                               // AdminPanel()
                               loginLogin(),
                               
@@ -96,36 +98,40 @@ class _MenuScreenState extends State<MenuScreen> {
                     leading: Icon(Icons.person_outline_rounded),
                     title: Text("Admin Panel"),
                   ),
+                  // ListTile(
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => const ProceedToPayment()));
+                  //   },
+                  //   leading: Icon(Icons.payment),
+                  //   title: Text(Payment),
+                  // ),
                   ListTile(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProceedToPayment()));
-                    },
-                    leading: Icon(Icons.payment),
-                    title: Text(Payment),
-                  ),
-                  ListTile(
-                    onTap: () {
+                      userController.loginName = "labour";
+                      userController.update();
                           Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  LabourUpload()));
+                              builder: (context) =>    loginLogin(),));
                     },
-                    leading: Icon(Icons.settings),
-                    title: Text(Settings),
+                    leading: Icon(Icons.work),
+                    title: Text("Labour Sign Up"),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(MapViewGoogle());
+                    },
                     leading: Icon(Icons.help),
-                    title: const Text(Help),
+                    title: const Text("Location"),
                   ),
-                  ListTile(
-                    onTap: () {},
-                    leading: Icon(Icons.feed),
-                    title: Text(Privacy),
-                  ),
+                  // ListTile(
+                  //   onTap: () {},
+                  //   leading: Icon(Icons.feed),
+                  //   title: Text(Privacy),
+                  // ),
                   SizedBox(height: 75.h),
                   SizedBox(
                     height: 49.h,

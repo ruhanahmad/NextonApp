@@ -39,6 +39,7 @@ dependencies:
   image_picker: ^0.8.6+4
   easy_splash_screen: ^1.0.4
   flutter_screenutil: ^5.6.1
+  rename: ^2.1.1
 
   #____________ drawer ___________
   flutter_zoom_drawer: ^3.0.3

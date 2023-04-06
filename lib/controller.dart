@@ -13,10 +13,11 @@ import 'package:camera/camera.dart';
 import 'dart:io' as io;
 import 'package:image_picker/image_picker.dart';
 import 'package:nextonapp/admin_panel.dart';
+import 'package:nextonapp/labour/upload_labour.dart';
 class UserController extends GetxController {
 
 String? hintText;
-
+String? loginName;
 
    Future<UploadTask?> uploadFilesLabour(XFile? files,context) async {
     // EasyLoading.show();
@@ -168,7 +169,11 @@ final QuerySnapshot result =
 print(documents.length);
 // print(userId!.uid);
 if (documents.length > 0) { 
-Get.to(AdminPanel());
+  loginName == "admin"?
+Get.to(AdminPanel())   
+
+:Get.to(LabourUpload())
+;
     //    var ids = documents.first.id;
     // var  balanc  = documents.first["accountB"];
 

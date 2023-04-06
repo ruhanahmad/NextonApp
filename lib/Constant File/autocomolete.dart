@@ -19,60 +19,81 @@ class _AutocompleteWithFirebaseState extends State<AutocompleteWithFirebase> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      backgroundColor: Colors.red,
-      body: Column(
-        children: [
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.yellow,
+        body: Column(
+          children: [
+    
+              //  TextFormField(
+              //     decoration: new InputDecoration(
+              //     labelText: "Enter Email",
+              //     fillColor: Colors.white,
+              //     border: new OutlineInputBorder(
+              //       borderRadius: new BorderRadius.circular(25.0),
+              //       borderSide: new BorderSide(
+              //       ),
+              //     ),
+              //     //fillColor: Colors.green
+              //     ),
+              //     validator: (val) {
+              //     if(val!.length==0) {
+              //       return "Email cannot be empty";
+              //     }else{
+              //       return null;
+              //     }
+              //     },
+              //     keyboardType: TextInputType.emailAddress,
+              //     style: new TextStyle(
+              //     fontFamily: "Poppins",
+              //     ),
+              //   ),
           TextFormField(
-            controller: _textEditingController,
-            decoration: InputDecoration(
-              
-              labelText: 'Search',
-              hintText:"Search",
-              suffixIcon: IconButton(
-                onPressed: () => _textEditingController.clear(),
-                icon: Icon(Icons.clear),
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                
+                labelText: 'Search',
+                hintText:"Search",
+                suffixIcon: IconButton(
+                  onPressed: () => _textEditingController.clear(),
+                  icon: Icon(Icons.clear),
+                ),
               ),
+              onChanged: (query) => _updateSuggestions(query),
             ),
-            onChanged: (query) => _updateSuggestions(query),
-          ),
-          SizedBox(height: 20),
-          _textEditingController.text.length == 0 ?  Text("data") :
-                                  Padding(
-                                    padding: const EdgeInsets.only(top:20.0),
-                                    child: Container( 
-                                      // color: Colors.white,
-                                                    height: MediaQuery.of(context).size.width * 0.35,
-                                                    width: MediaQuery.of(context).size.width * 0.9,
-                                                    child: Row(
-                                                           children: <Widget> [
-                                  
-                                                            Expanded(
-                                  child: 
-                                  ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                    itemCount:_suggestions.length ,
-                                    itemBuilder:(BuildContext context, index) {
-                                      final suggestion = _suggestions[index];
-                                      final image = labourImages[index];
-                                      final work = labourWork[index];
-                                      return
-     Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Container(
-                        height: 300.h,
-                        width: 100.w,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(color: Colors.white),
+            SizedBox(height: 20),
+            _textEditingController.text.length == 0 ?  Text("data") :
+                                    Padding(
+                                      padding: const EdgeInsets.only(top:20.0),
+                                      child: Container( 
+                                        // color: Colors.white,
+                                                      height: MediaQuery.of(context).size.width * 0.35,
+                                                      width: MediaQuery.of(context).size.width +30,
+                                                      child: Row(
+                                                             children: <Widget> [
+                                    
+                                                              Expanded(
+                                    child: 
+                                    ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                      itemCount:_suggestions.length ,
+                                      itemBuilder:(BuildContext context, index) {
+                                        final suggestion = _suggestions[index];
+                                        final image = labourImages[index];
+                                        final work = labourWork[index];
+                                        return
+       Padding(
+                        padding: const EdgeInsets.only(left: 20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 12.h),
-            
+              
                            Image.network(
                               image,
-                              height: 112.h,
-                              width: 170.w,
+                              height: 302.h,
+                              width: 200.w,
+                              fit: BoxFit.contain,
                                   loadingBuilder: (BuildContext context, Widget child,
                                   ImageChunkEvent? loadingProgress) {
                                 if (loadingProgress == null) return child;
@@ -99,26 +120,23 @@ class _AutocompleteWithFirebaseState extends State<AutocompleteWithFirebase> {
                               ),
                             ),
                             SizedBox(height: 8.h),
-                            SizedBox(
-                              width: 200,
-                              child: Text(
-                                work,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 13.sp),
-                              ),
+                            Text(
+                              work,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 13.sp),
                             ),
                             SizedBox(height: 12.h),
                             Center(
-                    child: WhatsAppButton(
-                      phoneNumber: '+923226662204',
+                      child: WhatsAppButton(
+                        phoneNumber: '+923226662204',
                                 
-                      message: 'Aslamo Alikum ! i want to hire this person ${suggestion} ',
-                    ),
-      )
-
-      ,
+                        message: 'Aslamo Alikum ! i want to hire this person ${suggestion} ',
+                      ),
+        )
+    
+        ,
                             // Row(
                             //   children: [
                             //     Icon(
@@ -144,209 +162,214 @@ class _AutocompleteWithFirebaseState extends State<AutocompleteWithFirebase> {
                             // )
                           ],
                         ),
-                      ),
-                    );
-                                        
-                                // Padding(
-                                //   padding: const EdgeInsets.only(top:8.0),
-                                //   child: Container(
-                                //     height: 70,
-                                //     width: Get.width,
-                                //     color: Colors.yellow,
-                                //     child: ListTile(
-                                //         //        onTap: () async{
-                                              
-                                //         //        _textEditingController.text = "";
-                                //         //         // List<Location> locations = await locationFromAddress("Pakistan");
-                                //         //         // print(locations.last.longitude);
-                                //         // userController.hintText = _suggestions[index];
-                                         
-                                //         //   userController.update();
-                                //         //     setState(() {
-                                              
-                                //         //     });
-                                //         //      },
-                                //           contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                                //           leading: 
-                                //          Container(
-                                //            height: 70,
-                                //            width: 70,
-                                //            child: 
-                                //            image == null ? Text("loading") :
-                                //            Image.network(
-                                //                            image,
-                                //                            height: 42.h,
-                                //                            width: 40.w,
-                                //                                loadingBuilder: (BuildContext context, Widget child,
-                                //                                ImageChunkEvent? loadingProgress) {
-                                //                              if (loadingProgress == null) return child;
-                                //                              return Center(
-                                //                                child: CircularProgressIndicator(
-                                //                                  value: loadingProgress.expectedTotalBytes != null
-                                //                                      ? loadingProgress.cumulativeBytesLoaded /
-                                //                                          loadingProgress.expectedTotalBytes!
-                                //                                      : null,
-                                //                                ),
-                                //                              );
-                                //                            },
-                                //                          ),
-                                //          ),
-                                //           title:
-                                //       Text(suggestion,style: TextStyle(color: Colors.black),),
-                                //           // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-                                  
-                                //           subtitle: Row(
-                                //             children: <Widget>[
-                                //               Icon(Icons.linear_scale, color: Colors.yellowAccent),
-                                //               Text(" Intermediate", style: TextStyle(color: Colors.white))
-                                //             ],
-                                //           ),
-                                //           trailing:
-                                //               Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
-                                //   ),
-                                // );
-
-
-                                    }) )
-                                 
-                                  
-                                                      ]
-                                                           )
-                                                    ),
-                                  ),
-                                  _textEditingController.text == ""?
-                                      StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('labour').snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final docs = snapshot.data!.docs;
-          return Container(
-            height: 300.h,
-            width: 500.w,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: docs.length,
-              itemBuilder: (BuildContext context, int index) {
-                final data = docs[index];
-                return 
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Container(
-                        height: 260.h,
-                        width: 100.w,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(color: Colors.white),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 12.h),
-            
-                           Image.network(
-                              data['labourImage'],
-                              height: 112.h,
-                              width: 170.w,
-                                  loadingBuilder: (BuildContext context, Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes != null
-                                        ? loadingProgress.cumulativeBytesLoaded /
-                                            loadingProgress.expectedTotalBytes!
-                                        : null,
-                                  ),
-                                );
-                              },
-                            ),
-                            SizedBox(height: 10.h),
-                            Container(
-                              // color: Colors.yellow,
-                              width: MediaQuery.of(context).size.width,
-                              child: Text(
-                                data["labourName"],
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 15.sp),
-                              ),
-                            ),
-                            SizedBox(height: 8.h),
-                            SizedBox(
-                              width: 200,
-                              child: Text(
-                                data["labourWork"],
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 13.sp),
-                              ),
-                            ),
-                            SizedBox(height: 12.h),
-                            Center(
-                    child: WhatsAppButton(
-                      phoneNumber: '+923226662204',
-                                
-                      message: 'Aslamo Alikum ! i want to hire this person ${data["labourName"]} ',
-                    ),
-      )
-
-      ,
-                            // Row(
-                            //   children: [
-                            //     Icon(
-                            //       Icons.star,
-                            //       color: Color(0XFFF5A62E),
-                            //       size: 20.sp,
-                            //     ),
-                            //     SizedBox(width: 5.w),
-                            //     Text(
-                            //       '4+',
-                            //       style: TextStyle(
-                            //           color: Colors.black,
-                            //           fontWeight: FontWeight.w500,
-                            //           fontSize: 13.sp),
-                            //     ),
-                            //     Spacer(),
-                            //     Icon(
-                            //       Icons.favorite,
-                            //       color: Colors.red,
-                            //       size: 20.sp,
-                            //     ),
-                            //   ],
-                            // )
-                          ],
-                        ),
-                      ),
-                    );
+                      );
+                                          
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(top:8.0),
+                                  //   child: Container(
+                                  //     height: 70,
+                                  //     width: Get.width,
+                                  //     color: Colors.yellow,
+                                  //     child: ListTile(
+                                  //         //        onTap: () async{
+                                                
+                                  //         //        _textEditingController.text = "";
+                                  //         //         // List<Location> locations = await locationFromAddress("Pakistan");
+                                  //         //         // print(locations.last.longitude);
+                                  //         // userController.hintText = _suggestions[index];
+                                           
+                                  //         //   userController.update();
+                                  //         //     setState(() {
+                                                
+                                  //         //     });
+                                  //         //      },
+                                  //           contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                                  //           leading: 
+                                  //          Container(
+                                  //            height: 70,
+                                  //            width: 70,
+                                  //            child: 
+                                  //            image == null ? Text("loading") :
+                                  //            Image.network(
+                                  //                            image,
+                                  //                            height: 42.h,
+                                  //                            width: 40.w,
+                                  //                                loadingBuilder: (BuildContext context, Widget child,
+                                  //                                ImageChunkEvent? loadingProgress) {
+                                  //                              if (loadingProgress == null) return child;
+                                  //                              return Center(
+                                  //                                child: CircularProgressIndicator(
+                                  //                                  value: loadingProgress.expectedTotalBytes != null
+                                  //                                      ? loadingProgress.cumulativeBytesLoaded /
+                                  //                                          loadingProgress.expectedTotalBytes!
+                                  //                                      : null,
+                                  //                                ),
+                                  //                              );
+                                  //                            },
+                                  //                          ),
+                                  //          ),
+                                  //           title:
+                                  //       Text(suggestion,style: TextStyle(color: Colors.black),),
+                                  //           // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
+                                    
+                                  //           subtitle: Row(
+                                  //             children: <Widget>[
+                                  //               Icon(Icons.linear_scale, color: Colors.yellowAccent),
+                                  //               Text(" Intermediate", style: TextStyle(color: Colors.white))
+                                  //             ],
+                                  //           ),
+                                  //           trailing:
+                                  //               Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
+                                  //   ),
+                                  // );
+    
+    
+                                      }) )
+                                   
+                                    
+                                                        ]
+                                                             )
+                                                      ),
+                                    ),
+                                    _textEditingController.text == ""?
+                                        StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('labour').snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final docs = snapshot.data!.docs;
+            return Container(
+              height: 300.h,
+              width: 500.w,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: docs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final data = docs[index];
+                  return 
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Container(
+                          height: 260.h,
+                          width: 100.w,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 12.h),
               
-              },
-            ),
-          );
-        },
-      ): Text(""),
-          //         _textEditingController.text.length == 0 ?  Text("data") :
-
-          // Expanded(
-          //   child: ListView.builder(
-          //     itemCount: _suggestions.length,
-          //     itemBuilder: (context, index) {
-          //       final suggestion = _suggestions[index];
-          //       return ListTile(
-          //         onTap: () {
-          //           _textEditingController.text = "";
-          //            userController.hintText = _suggestions[index];
-                         
-          //                 userController.update();
-          //         },
-          //         title: Text(suggestion,style: TextStyle(color: Colors.black),));
-          //     },
-          //   ),
-          // ),
-        ],
+                             Image.network(
+                                data['labourImage'],
+                                height: 112.h,
+                                width: 170.w,
+                                    loadingBuilder: (BuildContext context, Widget child,
+                                    ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value: loadingProgress.expectedTotalBytes != null
+                                          ? loadingProgress.cumulativeBytesLoaded /
+                                              loadingProgress.expectedTotalBytes!
+                                          : null,
+                                    ),
+                                  );
+                                },
+                              ),
+                              SizedBox(height: 10.h),
+                              Container(
+                                // color: Colors.yellow,
+                                width: MediaQuery.of(context).size.width,
+                                child: Text(
+                                  data["labourName"],
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15.sp),
+                                ),
+                              ),
+                              SizedBox(height: 8.h),
+                              SizedBox(
+                                width: 200,
+                                child: Text(
+                                  data["labourWork"],
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 13.sp),
+                                ),
+                              ),
+                              SizedBox(height: 12.h),
+                              Center(
+                      child: Container(
+                        height: 40,
+                        width: 120,
+                        child: WhatsAppButton(
+                          
+                          phoneNumber: '+923226662204',
+                                    
+                          message: 'Aslamo Alikum ! i want to hire this person ${data["labourName"]} ',
+                        ),
+                      ),
+        )
+    
+        ,
+                              // Row(
+                              //   children: [
+                              //     Icon(
+                              //       Icons.star,
+                              //       color: Color(0XFFF5A62E),
+                              //       size: 20.sp,
+                              //     ),
+                              //     SizedBox(width: 5.w),
+                              //     Text(
+                              //       '4+',
+                              //       style: TextStyle(
+                              //           color: Colors.black,
+                              //           fontWeight: FontWeight.w500,
+                              //           fontSize: 13.sp),
+                              //     ),
+                              //     Spacer(),
+                              //     Icon(
+                              //       Icons.favorite,
+                              //       color: Colors.red,
+                              //       size: 20.sp,
+                              //     ),
+                              //   ],
+                              // )
+                            ],
+                          ),
+                        ),
+                      );
+                
+                },
+              ),
+            );
+          },
+        ): Text(""),
+            //         _textEditingController.text.length == 0 ?  Text("data") :
+    
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: _suggestions.length,
+            //     itemBuilder: (context, index) {
+            //       final suggestion = _suggestions[index];
+            //       return ListTile(
+            //         onTap: () {
+            //           _textEditingController.text = "";
+            //            userController.hintText = _suggestions[index];
+                           
+            //                 userController.update();
+            //         },
+            //         title: Text(suggestion,style: TextStyle(color: Colors.black),));
+            //     },
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }

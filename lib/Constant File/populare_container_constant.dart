@@ -10,7 +10,7 @@ import '../String File/image_string.dart';
 import '../String File/text_string.dart';
 
 class PopulareContainer extends StatefulWidget {
-  const PopulareContainer({super.key});
+  const   PopulareContainer({super.key});
   
 
   @override
@@ -52,6 +52,8 @@ class _PopulareContainerState extends State<PopulareContainer> {
       // color: Colors.red,
       height: 300.h,
       child: 
+      //ya vala  product eska catname us mai dykhna bs ya krna h k
+      //ya prdocuts
       StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('product').where("catName", isEqualTo: userController.nami).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -158,7 +160,8 @@ await alerting(data['product image'],data["name"],data["video"]);
                 // Row(
                 //   children: [
                 //     Icon(
-                //       Icons.star,
+                //       Icons.star, wo button kidhar hay 
+                
                 //       color: Color(0XFFF5A62E),
                 //       size: 20.sp,
                 //     ),

@@ -15,7 +15,7 @@ class City {
   City( this.name);
 }
 class loginLogin extends StatefulWidget {
-  const loginLogin({super.key});
+   loginLogin({super.key,});
 
   @override
   State<loginLogin> createState() => _loginLoginState();
@@ -23,7 +23,7 @@ class loginLogin extends StatefulWidget {
 
 class _loginLoginState extends State<loginLogin> {
     
-
+//ab nh a rha ,vo error hta h k setstate used after build
   
   
 
@@ -109,6 +109,7 @@ IconButton(onPressed: (){
                    SizedBox(height: 30,),
                      GestureDetector(
                       onTap: ()async{
+                        
 await _.logins();
                       },
                        child: Container(
